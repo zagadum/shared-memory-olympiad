@@ -1,5 +1,5 @@
 {
-    "name": "yourname/shared-memory-olympiad",
+    "name": "space-memory/shared-memory-olympiad",
     "description": "Shared models, helpers, and migrations for Memory Olympiad",
     "autoload": {
         "psr-4": {
