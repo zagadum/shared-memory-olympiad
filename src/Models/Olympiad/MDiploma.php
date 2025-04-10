@@ -13,6 +13,6 @@ class MDiploma extends Model
     protected $table = 'm_diplomas';
 
     protected $fillable = [
-        'm_olympiad_id', 'template_name', 'category', 'diploma_text'
+        'olympiad_id', 'template_name', 'category', 'diploma_text'
     ];
 }

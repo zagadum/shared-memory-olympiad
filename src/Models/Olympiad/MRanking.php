@@ -13,6 +13,6 @@ class MRanking extends Model
     protected $table = 'm_rankings';
 
     protected $fillable = [
-        'm_olympiad_id', 'm_participant_id', 'place', 'score'
+        'olympiad_id', 'participant_id', 'place', 'score'
     ];
 }

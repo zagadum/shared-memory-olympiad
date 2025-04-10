@@ -2,7 +2,7 @@
 
 namespace MemoryOlympiad\Models\Olympiad;
 
-use App\Models\Franchisee;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

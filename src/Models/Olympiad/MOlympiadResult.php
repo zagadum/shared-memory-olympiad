@@ -13,23 +13,23 @@ class MOlympiadResult extends Model
     protected $table = 'm_olympiad_results';
 
     protected $fillable = [
-        'm_olympiad_id', 'm_participant_id', 'm_task_id',
+        'olympiad_id', 'participant_id', 'task_id',
         'result_date', 'score', 'total_tasks', 'correct_answers',
         'wrong_answers', 'accuracy_percentage'
     ];
 
     public function olympiad()
     {
-        return $this->belongsTo(MOlympiad::class, 'm_olympiad_id');
+        return $this->belongsTo(MOlympiad::class, 'olympiad_id');
     }
 
     public function participant()
     {
-        return $this->belongsTo(MParticipant::class, 'm_participant_id');
+        return $this->belongsTo(MParticipant::class, 'participant_id');
     }
 
     public function task()
     {
-        return $this->belongsTo(MOlympiadTask::class, 'm_task_id');
+        return $this->belongsTo(MOlympiadTask::class, 'task_id');
     }
 }

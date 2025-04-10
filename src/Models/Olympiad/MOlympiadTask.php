@@ -17,6 +17,6 @@ class MOlympiadTask extends Model
 
     public function olympiad()
     {
-        return $this->belongsTo(MOlympiad::class, 'm_olympiad_id');
+        return $this->belongsTo(MOlympiad::class, 'olympiad_id');
     }
 }
