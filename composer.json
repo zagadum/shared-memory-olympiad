@@ -1,0 +1,20 @@
+{
+    "name": "yourname/shared-memory-olympiad",
+    "description": "Shared models, helpers, and migrations for Memory Olympiad",
+    "autoload": {
+        "psr-4": {
+            "MemoryOlympiad\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MemoryOlympiad\\MemoryOlympiadServiceProvider"
+            ]
+        }
+    },
+    "require": {}
+}
