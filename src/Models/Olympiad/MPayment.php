@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Olympiad;
+namespace MemoryOlympiad\Models\Olympiad;
 
 use App\Models\Franchisee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

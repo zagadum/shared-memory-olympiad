@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Olympiad;
+namespace MemoryOlympiad\Models\Olympiad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
