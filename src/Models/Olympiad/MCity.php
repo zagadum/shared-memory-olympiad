@@ -21,10 +21,5 @@ class MCity extends Model
         'updated_at',
     
     ];
-    
-    protected $appends = ['resource_url'];
-
-    /* ************************ ACCESSOR ************************* */
-
 
 }
