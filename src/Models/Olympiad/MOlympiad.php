@@ -34,15 +34,17 @@ class MOlympiad extends Model
 
     protected $casts = [
 
-        'announcement_start_date' => 'date',
-        'announcement_end_date' => 'date',
-        'activation_date' => 'date',
-        'start_date' => 'date',
-        'end_date' => 'date',
+        'announcement_start_date' => 'date:Y-m-d',
+        'announcement_end_date' => 'date:Y-m-d',
+        'activation_date' => 'date:Y-m-d',
+        'start_date' => 'date:Y-m-d',
+        'end_date' => 'date:Y-m-d',
     ];
-//    public function getDescibe(){
-//        return $this->hasOne(MOlympiadDescription::class, 'olympiad_id', 'id');
-//    }
+
+    public function serializeDate(\DateTimeInterface $date) {
+        return $date->format('Y-m-d');
+    }
+
 
     public function City() {
         return $this->hasOne(MCity::class, 'id', 'city_id');
