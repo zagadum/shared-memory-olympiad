@@ -11,11 +11,10 @@ class MCity extends Model
     protected $fillable = [
         'name',
         'country_id',
-        'region_id',
-        'enabled',
-    
+        'region_id'
+
     ];
-    
+
     
     protected $dates = [
         'created_at',
