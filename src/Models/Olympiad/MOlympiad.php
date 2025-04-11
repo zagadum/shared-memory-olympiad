@@ -28,7 +28,7 @@ class MOlympiad extends Model
         'activation_date',
         'start_date',
         'end_date',
-        'language_tabs', 'status', 'created_by'
+        'status', 'created_by'
     ];
 
     protected $casts = [
