@@ -26,8 +26,5 @@ class MCity extends Model
 
     /* ************************ ACCESSOR ************************* */
 
-    public function getResourceUrlAttribute()
-    {
-        return url('/admin/cities/'.$this->getKey());
-    }
+
 }
