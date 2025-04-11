@@ -2,9 +2,10 @@
 
 namespace MemoryOlympiad\Models\Olympiad;
 
-use Models\MCity;
-use Models\MCountry;
-use Models\MRegion;
+
+use MemoryOlympiad\Models\Olympiad\MCity;
+use MemoryOlympiad\Models\Olympiad\MCountry;
+use MemoryOlympiad\Models\Olympiad\MRegion;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
