@@ -2,6 +2,10 @@
 
 namespace MemoryOlympiad\Models\Olympiad;
 
+use Models\MCity;
+use Models\MCountry;
+use Models\MRegion;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,9 +17,17 @@ class MOlympiad extends Model
     protected $table = 'm_olympiads';
 
     protected $fillable = [
-        'type', 'country', 'city',
-        'announcement_start_date', 'announcement_end_date',
-        'activation_date', 'start_date', 'end_date',
+        'country_id',
+        'region_id',
+        'city_id',
+        'locality',
+        'promotion', // enum {ads,olympiad}
+        'is_international',
+        'announcement_start_date',
+        'announcement_end_date',
+        'activation_date',
+        'start_date',
+        'end_date',
         'language_tabs', 'status', 'created_by'
     ];
 
@@ -31,4 +43,16 @@ class MOlympiad extends Model
 //        return $this->hasOne(MOlympiadDescription::class, 'olympiad_id', 'id');
 //    }
 
+    public function City() {
+        return $this->hasOne(MCity::class, 'id', 'city_id');
+
+    }
+    public function Region(){
+        return $this->hasOne(MRegion::class, 'id', 'region_id');
+
+    }
+    public function Country() {
+        return $this->hasOne(MCountry::class, 'id', 'country_id');
+
+    }
 }
