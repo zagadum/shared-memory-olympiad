@@ -29,7 +29,12 @@ class MOlympiad extends Model
         'activation_date',
         'start_date',
         'end_date',
-        'status', 'created_by'
+        'status',
+        'local_price',
+        'local_currency', //default UAH
+        'international_price',
+        'international_currency',//default EUR
+        'created_by'
     ];
 
     protected $casts = [
