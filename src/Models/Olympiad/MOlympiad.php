@@ -63,4 +63,5 @@ class MOlympiad extends Model
         return $this->hasOne(MCountry::class, 'id', 'country_id');
 
     }
+
 }

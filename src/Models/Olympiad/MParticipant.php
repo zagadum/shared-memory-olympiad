@@ -46,7 +46,28 @@ class MParticipant extends Model
         });
     }
 
-    // Связи
+
+    public function City() {
+        return $this->hasOne(MCity::class, 'id', 'city_id');
+
+    }
+    public function Region(){
+        return $this->hasOne(MRegion::class, 'id', 'region_id');
+
+    }
+    public function Country() {
+        return $this->hasOne(MCountry::class, 'id', 'country_id');
+
+    }
+
+    function getAgeFromDob($dob)
+    {
+        $dob = new DateTime($dob);
+        $now = new DateTime();
+        $age = $now->diff($dob)->y;
+    }
+
+        // Связи
     public function olympiads()
     {
         return $this->hasMany(MOlympiad::class, 'created_by');

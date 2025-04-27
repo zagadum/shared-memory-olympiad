@@ -14,7 +14,7 @@ class MPayment extends Model
     protected $table = 'm_payments';
 
     protected $fillable = [
-        'participant_id', 'olympiad_id', 'amount', 'currency', 'status','payment_date','is_pay'
+        'practicant_id', 'olympiad_id', 'amount', 'currency', 'status','payment_date','is_pay'
     ];
 
 
