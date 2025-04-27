@@ -10,13 +10,13 @@ class CreateMPaymentsTable extends Migration
         Schema::connection('memory_olympiad')->create('m_payments', function (Blueprint $table) {
             $table->id();
             $table->dateTime('payment_date');
-            $table->unsignedBigInteger('participant_id');
-            $table->unsignedBigInteger('olympiad_id');
+            $table->unsignedBigInteger('participant_id')->index();
+            $table->unsignedBigInteger('olympiad_id')->index();
+            $table->intager('is_pay')->default(0)->comment('0 - not pay, 1 - pay')->index();
             $table->decimal('amount', 10, 2);
             $table->string('currency', 10);
-            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
+            $table->enum('status', ['pending', 'ok', 'failed'])->default('pending');
             $table->timestamps();
-
 
         });
     }

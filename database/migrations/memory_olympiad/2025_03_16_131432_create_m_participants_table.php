@@ -9,26 +9,30 @@ class CreateMParticipantsTable extends Migration
     {
         Schema::connection('memory_olympiad')->create('m_participants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
-            $table->string('lastname');
-            $table->string('patronymic')->nullable();
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->string('name', 255)->nullable();
+            $table->string('surname', 255)->nullable();
+            $table->string('lastname', 255)->nullable();
+            $table->string('patronymic', 255)->nullable();
 
             // Контактные данные
-            $table->string('email')->unique();
+            $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('phone_country')->nullable();
+            $table->string('phone', 255)->nullable();
+            $table->string('phone_country', 255)->nullable();
 
             // Адрес
             $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedBigInteger('region_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->string('locality')->nullable();
+            $table->string('locality', 255)->nullable();
 
             // Школа и возраст
-            $table->string('school')->nullable();
+            $table->string('school', 255)->nullable();
             $table->unsignedBigInteger('age_id')->nullable();
+
+            // Дата рождения
+            $table->date('dob')->nullable();
 
             // Состояние аккаунта
             $table->boolean('blocked')->default(false);
@@ -36,7 +40,7 @@ class CreateMParticipantsTable extends Migration
             $table->timestamp('last_login_at')->nullable();
 
             // Безопасность
-            $table->string('password');
+            $table->string('password', 255);
             $table->rememberToken();
             $table->string('api_token', 80)->unique()->nullable();
 

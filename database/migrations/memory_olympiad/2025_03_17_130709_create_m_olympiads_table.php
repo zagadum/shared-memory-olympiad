@@ -10,21 +10,25 @@ class CreateMOlympiadsTable extends Migration
     {
         Schema::connection('memory_olympiad')->create('m_olympiads', function (Blueprint $table) {
             $table->id();
-            $table->string('title'); // Название олимпиады
-            $table->enum('type', ['Украинская', 'Польская', 'Международная']);
-            $table->string('country');
-            $table->string('city')->default('Вся Украина');
-            $table->date('announcement_start_date'); // Дата начала анонса
-            $table->date('announcement_end_date'); // Дата окончания анонса
-            $table->date('activation_date'); // Дата активации олимпиады
-            $table->date('start_date'); // Дата начала
-            $table->date('end_date'); // Дата окончания
-            $table->json('language_tabs'); // Мультиязычные описания
+            $table->string('title', 255);
+            $table->unsignedBigInteger('country_id')->default(0);
+            $table->unsignedBigInteger('region_id')->nullable()->default(0);
+            $table->unsignedBigInteger('city_id')->default(0);
+            $table->string('locality', 255)->nullable();
+            $table->enum('promotion', ['ads', 'olympiad'])->nullable()->default('olympiad');
+            $table->integer('is_international')->nullable()->default(0);
+            $table->date('announcement_start_date');
+            $table->date('announcement_end_date');
+            $table->date('activation_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->enum('status', ['draft', 'announced', 'active', 'completed'])->default('draft');
-            $table->unsignedBigInteger('created_by'); // ID создателя
+            $table->unsignedInteger('local_price')->nullable()->default(0);
+            $table->string('local_currency', 3)->nullable()->default('UAH');
+            $table->decimal('international_price', 10, 2)->unsigned()->nullable()->default(0.00);
+            $table->string('international_currency', 3)->nullable()->default('EUR');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
-
-
         });
     }
 
@@ -33,4 +37,3 @@ class CreateMOlympiadsTable extends Migration
         Schema::connection('memory_olympiad')->dropIfExists('m_olympiads');
     }
 }
-
