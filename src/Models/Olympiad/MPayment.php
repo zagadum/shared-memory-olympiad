@@ -6,7 +6,7 @@ namespace MemoryOlympiad\Models\Olympiad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mpayment extends Model
+class MPayment extends Model
 {
     use HasFactory;
 
