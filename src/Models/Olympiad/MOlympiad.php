@@ -66,7 +66,7 @@ class MOlympiad extends Model
     public function paymentsByParticipant($participant_id)
     {
         return $this->hasMany(MPayment::class, 'olympiad_id', 'id')
-            ->where('participant_id', $participant_id);
+            ->where('practicant_id', $participant_id);
     }
 
 }
