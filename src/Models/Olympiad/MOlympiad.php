@@ -63,5 +63,10 @@ class MOlympiad extends Model
         return $this->hasOne(MCountry::class, 'id', 'country_id');
 
     }
+    public function paymentsByParticipant($participant_id)
+    {
+        return $this->hasMany(MPayment::class, 'olympiad_id', 'id')
+            ->where('participant_id', $participant_id);
+    }
 
 }
