@@ -14,12 +14,12 @@ class MPayment extends Model
     protected $table = 'm_payments';
 
     protected $fillable = [
-        'participant_id', 'olympiad_id', 'amount', 'currency', 'status','payment_date','is_pay'
+        'practicant_id', 'olympiad_id', 'amount', 'currency', 'status','payment_date','is_pay'
     ];
 
 
     public function Participant(){
-        return $this->hasOne(MParticipant::class, 'id', 'participant_id');
+        return $this->hasOne(MParticipant::class, 'id', 'practicant_id');
     }
 
     public function Olympiad(){
@@ -44,6 +44,6 @@ class MPayment extends Model
     public function paymentsByParticipant($participant_id)
     {
         return $this->hasMany(MPayment::class, 'olympiad_id', 'id')
-            ->where('participant_id', $participant_id);
+            ->where('practicant_id', $participant_id);
     }
 }
