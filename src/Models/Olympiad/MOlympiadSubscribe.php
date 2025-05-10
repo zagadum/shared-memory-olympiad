@@ -11,10 +11,10 @@ class MOlympiadSubscribe extends Model
     use HasFactory;
 
     protected $connection = 'memory_olympiad';
-    protected $table = 'm_payments';
+    protected $table = 'm_olympiad_subscribe';
 
     protected $fillable = [
-        'practicant_id', 'olympiad_id', 'is_pay'
+        'practicant_id', 'olympiad_id', 'language','subscribe_date','is_pay','age_tab','stages_level','params_id',
     ];
 
 
