@@ -24,6 +24,11 @@ class MOlympiadParam extends Model
         'params_json'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+
+    ];
     protected $casts = [
         'stages_level' => 'string',
         'age_tab' => 'string',
