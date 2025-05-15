@@ -28,5 +28,7 @@ class MPracticantsTask extends Model
         'is_done' => 'boolean',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+
+
 }
