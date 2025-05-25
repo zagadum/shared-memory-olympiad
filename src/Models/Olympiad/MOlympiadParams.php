@@ -5,7 +5,7 @@ namespace MemoryOlympiad\Models\Olympiad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MOlympiadParam extends Model
+class MOlympiadParams extends Model
 {
     use HasFactory;
 
