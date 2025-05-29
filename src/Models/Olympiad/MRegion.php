@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MRegion extends Model
 {
+    protected $connection = 'memory_olympiad';
     protected $table = 'region';
 
     protected $fillable = [

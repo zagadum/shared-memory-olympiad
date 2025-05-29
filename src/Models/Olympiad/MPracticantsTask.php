@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MPracticantsTask extends Model
 {
     use HasFactory;
-
+    protected $connection = 'memory_olympiad';
     protected $table = 'm_practicants_task';
     protected $primaryKey = 'task_id';
 
