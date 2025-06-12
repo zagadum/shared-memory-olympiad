@@ -21,6 +21,7 @@ class MOlympiadParams extends Model
         'is_intermediate',
         'is_pro',
         'training_type_id',
+        'table_link',
         'params_json'
     ];
 
