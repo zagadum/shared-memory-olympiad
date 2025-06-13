@@ -55,7 +55,7 @@ class MOlympiadResult extends Model
 //        if ($external['participant_id']) {
 //            return false;
 //        }
-        $practicant_id = $external['practicant_id'] ?? null;
+        $practicant_id = $external['practicant_id'] ?? 0;
         $TotalTimeShow=$resultInfo['TotalTimeShow']??0;
         $TotalTimeEnter=$resultInfo['TotalTimeEnter']??0;
         $totalBall=$isFinish['bals']['total']??0;
