@@ -81,14 +81,14 @@ class MOlympiadResult extends Model
         ];
         $result = MOlympiadResult::create($TaskResult);
         $idResult = $result->id;
-        $FullResult=(object)[];
+        $FullResult= [];
         $FullResult['PageList']=session()->get('PageList',[]);
         $FullResult['TrainingTask']=session()->get('TrainingTask',[]);
         $FullResult['TrainingParams']=session()->get('TrainingParams',[]);
         $FullResult['resultSave']=session()->get('resultSave',[]);
         $FullResult['analize']=$isFinish['analize']??[];
 
-        MOlympiadResult::where('id',$idResult)->update(['full_info'=>json_decode(json_encode($FullResult))]);
+        MOlympiadResult::where('id',$idResult)->update(['full_info'=>$FullResult]);
 
     }
 }
