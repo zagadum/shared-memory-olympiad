@@ -51,7 +51,7 @@ class MOlympiadResult extends Model
         if (empty($external) || empty($resultInfo)) {
             return false;
         }
-        $taskId = $resultInfo['task_id'] ?? null;
+
         $participant_id = $resultInfo['participant_id'] ?? null;
         $TotalTimeShow=$resultInfo['TotalTimeShow']??0;
         $TotalTimeEnter=$resultInfo['TotalTimeEnter']??0;
@@ -62,9 +62,9 @@ class MOlympiadResult extends Model
 
 
         $TaskResult = [
-            'olympiad_id' => $external['olympiad_id'] ?? null,
+            'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'participant_id' => $participant_id,
-            'task_id' => $taskId,
+            'task_id' =>  $external['add_vars']['task_id'] ?? null,
             'table_link' => $table_link,
             'result_date' => now(),
             'time_memory' => $TotalTimeShow,
