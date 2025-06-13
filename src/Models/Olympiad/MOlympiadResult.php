@@ -52,9 +52,9 @@ class MOlympiadResult extends Model
             return false;
         }
 
-        if ($external['participant_id']) {
-            return false;
-        }
+//        if ($external['participant_id']) {
+//            return false;
+//        }
         $practicant_id = $external['practicant_id'] ?? null;
         $TotalTimeShow=$resultInfo['TotalTimeShow']??0;
         $TotalTimeEnter=$resultInfo['TotalTimeEnter']??0;
