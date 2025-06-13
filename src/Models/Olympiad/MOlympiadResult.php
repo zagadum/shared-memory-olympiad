@@ -13,9 +13,23 @@ class MOlympiadResult extends Model
     protected $table = 'm_olympiad_results';
 
     protected $fillable = [
-        'olympiad_id', 'participant_id', 'task_id',
-        'result_date', 'score', 'total_tasks', 'correct_answers',
-        'wrong_answers', 'accuracy_percentage'
+        'olympiad_id',
+        'participant_id',
+        'task_id',
+        'table_link',
+        'result_date',
+        'time_memory',
+        'time_answer',
+        'total',
+        'total_tasks',
+        'good',
+        'bad',
+        'full_info'
+
+    ];
+
+    protected $casts = [
+        'full_info' => 'array',
     ];
 
     public function olympiad()
@@ -31,5 +45,44 @@ class MOlympiadResult extends Model
     public function task()
     {
         return $this->belongsTo(MOlympiadTask::class, 'task_id');
+    }
+
+    static public function SaveResultExternal($external=[],$resultInfo=[]){
+        if (empty($external) || empty($resultInfo)) {
+            return false;
+        }
+        $taskId = $resultInfo['task_id'] ?? null;
+        $participant_id = $resultInfo['participant_id'] ?? null;
+        $TotalTimeShow=$resultInfo['TotalTimeShow']??0;
+        $TotalTimeEnter=$resultInfo['TotalTimeEnter']??0;
+        $totalBall=$isFinish['bals']['total']??0;
+        $Good=$isFinish['bals']['good']??0;
+        $Bad=$isFinish['bals']['bad']??0;
+        $table_link='';
+
+
+        $TaskResult = [
+            'olympiad_id' => $external['olympiad_id'] ?? null,
+            'participant_id' => $participant_id,
+            'task_id' => $taskId,
+            'table_link' => $table_link,
+            'result_date' => now(),
+            'time_memory' => $TotalTimeShow,
+            'time_answer' => $TotalTimeEnter,
+            'total' => $totalBall,
+            'good' => $Good,
+            'bad' => $Bad
+
+        ];
+        $result = MOlympiadResult::create($TaskResult);
+        $idResult = $result->id;
+        $FullResult=(object)[];
+        $FullResult['PageList']=session()->get('PageList',[]);
+        $FullResult['TrainingTask']=session()->get('TrainingTask',[]);
+        $FullResult['TrainingParams']=session()->get('TrainingParams',[]);
+        $FullResult['resultSave']=session()->get('resultSave',[]);
+        $FullResult['analize']=$isFinish['analize']??[];
+        MOlympiadResult::where('id',$idResult)->update(['full_info'=>json_decode(json_encode($FullResult))]);
+
     }
 }
