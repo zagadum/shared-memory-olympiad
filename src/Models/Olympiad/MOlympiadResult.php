@@ -52,6 +52,7 @@ class MOlympiadResult extends Model
             return false;
         }
 
+
 //        if ($external['participant_id']) {
 //            return false;
 //        }
@@ -62,6 +63,9 @@ class MOlympiadResult extends Model
         $Good=$isFinish['bals']['good']??0;
         $Bad=$isFinish['bals']['bad']??0;
         $table_link='';
+        print '<pre>';
+        print_r($external);
+        print_r($resultInfo);
 
 
         $TaskResult = [
@@ -85,6 +89,7 @@ class MOlympiadResult extends Model
         $FullResult['TrainingParams']=session()->get('TrainingParams',[]);
         $FullResult['resultSave']=session()->get('resultSave',[]);
         $FullResult['analize']=$isFinish['analize']??[];
+       print_r($FullResult);
         MOlympiadResult::where('id',$idResult)->update(['full_info'=>json_decode(json_encode($FullResult))]);
 
     }
