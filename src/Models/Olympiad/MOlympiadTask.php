@@ -1,4 +1,5 @@
 <?php
+
 namespace MemoryOlympiad\Models\Olympiad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,16 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class MOlympiadTask extends Model
 {
     use HasFactory;
-
     protected $connection = 'memory_olympiad';
-    protected $table = 'm_olympiad_tasks';
+    protected $table = 'm_olympiad_task';
+    protected $primaryKey = 'task_id';
 
     protected $fillable = [
-        'm_olympiad_id', 'task_description', 'task_type'
+        'practicant_id',
+        'olympiad_id',
+        'params_id',
+        'date_start',
+        'add_params',
+        'is_self',
+        'is_done',
     ];
 
-    public function olympiad()
-    {
-        return $this->belongsTo(MOlympiad::class, 'olympiad_id');
-    }
+    protected $casts = [
+        'add_params' => 'array',
+        'is_self' => 'boolean',
+        'is_done' => 'boolean',
+    ];
+
+    public $timestamps = false;
+
+
 }
