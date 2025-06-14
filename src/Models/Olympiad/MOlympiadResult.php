@@ -72,7 +72,7 @@ class MOlympiadResult extends Model
             'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'practicant_id' => $practicant_id,
             'task_id' =>  $external['add_vars']['task_id'] ?? null,
-            'subscribe_id' =>  $external['add_vars']['subscribe_id'] ?? null,
+            'subscribe_id' =>  $external['add_vars']['subscribe_id'] ?? $OlympyadTaskInfo['subscribe_id'] ?? null,
             'is_self' =>  $OlympyadTaskInfo['is_self'] ?? 0,
             'table_link' => $table_link,
             'result_date' => now(),
