@@ -88,7 +88,7 @@ class MOlympiadResult extends Model
         $FullResult['TrainingTask']=session()->get('TrainingTask',[]);
         $FullResult['TrainingParams']=session()->get('TrainingParams',[]);
         $FullResult['resultSave']=session()->get('resultSave',[]);
-        $FullResult['analize']=$isFinish['analize']??[];
+        $FullResult['isFinish']=$isFinish['isFinish']??[];
 
         MOlympiadResult::where('id',$idResult)->update(['full_info'=>$FullResult]);
 
