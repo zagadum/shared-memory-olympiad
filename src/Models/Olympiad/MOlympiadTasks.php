@@ -15,6 +15,7 @@ class MOlympiadTasks extends Model
     protected $fillable = [
         'practicant_id',
         'olympiad_id',
+        'subscribe_id',
         'params_id',
         'date_start',
         'add_params',
