@@ -8,6 +8,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="MemoryOlympiad\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
     </content>
     <orderEntry type="inheritedJdk" />

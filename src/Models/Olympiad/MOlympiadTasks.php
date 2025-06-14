@@ -5,11 +5,11 @@ namespace MemoryOlympiad\Models\Olympiad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MPracticantsTask extends Model
+class MOlympiadTasks extends Model
 {
     use HasFactory;
     protected $connection = 'memory_olympiad';
-    protected $table = 'm_practicants_task';
+    protected $table = 'm_olympiad_tasks';
     protected $primaryKey = 'task_id';
 
     protected $fillable = [
