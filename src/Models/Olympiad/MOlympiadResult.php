@@ -64,7 +64,7 @@ class MOlympiadResult extends Model
         $totalBall=$isFinish['bals']['total']??0;
         $Good=$isFinish['bals']['good']??0;
         $Bad=$isFinish['bals']['bad']??0;
-        $table_link='';
+        $table_link= $external['add_vars']['table_link']?? null;
 
 
 
