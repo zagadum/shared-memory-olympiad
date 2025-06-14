@@ -16,6 +16,7 @@ class MOlympiadResult extends Model
     protected $fillable = [
         'olympiad_id',
         'practicant_id',
+        'subscribe_id',
         'task_id',
         'table_link',
         'result_date',
@@ -73,6 +74,7 @@ class MOlympiadResult extends Model
             'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'practicant_id' => $practicant_id,
             'task_id' =>  $external['add_vars']['task_id'] ?? null,
+            'subscribe_id' =>  $external['add_vars']['subscribe_id'] ?? null,
             'table_link' => $table_link,
             'result_date' => now(),
             'time_memory' => $TotalTimeShow,
