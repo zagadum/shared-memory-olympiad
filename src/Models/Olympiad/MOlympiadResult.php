@@ -47,8 +47,8 @@ class MOlympiadResult extends Model
         return $this->belongsTo(MOlympiadTask::class, 'task_id');
     }
 
-    static public function SaveResultExternal($external=[],$resultInfo=[]){
-        if (empty($external) || empty($resultInfo)) {
+    static public function SaveResultExternal($external=[],$isFinish=[]){
+        if (empty($external)) {
             return false;
         }
 
@@ -58,8 +58,8 @@ class MOlympiadResult extends Model
         }
 
         $practicant_id = $external['practicant_id'] ?? 0;
-        $TotalTimeShow=$resultInfo['TotalTimeShow']??0;
-        $TotalTimeEnter=$resultInfo['TotalTimeEnter']??0;
+        $TotalTimeShow=$isFinish['TotalTimeShow']??0;
+        $TotalTimeEnter=$isFinish['TotalTimeEnter']??0;
 
         $totalBall=$isFinish['bals']['total']??0;
         $Good=$isFinish['bals']['good']??0;
