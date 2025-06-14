@@ -4,7 +4,7 @@ namespace MemoryOlympiad\Models\Olympiad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use MemoryOlympiad\Models\Olympiad\MOlympiadTask;
+use MemoryOlympiad\Models\Olympiad\MOlympiadTasks;
 
 class MOlympiadResult extends Model
 {
@@ -94,7 +94,7 @@ class MOlympiadResult extends Model
         MOlympiadResult::where('id',$idResult)->update(['full_info'=>$FullResult]);
 
         if ($external['add_vars']['task_id']>0){
-            MOlympiadTask::where('task_id', $external['add_vars']['task_id'])
+            MOlympiadTasks::where('task_id', $external['add_vars']['task_id'])
                 ->where('practicant_id', $practicant_id)
                 ->update(['is_done' => 1]);
         }
