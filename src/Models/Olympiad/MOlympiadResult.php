@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use MemoryOlympiad\Models\Olympiad\MOlympiadTasks;
 
+
 class MOlympiadResult extends Model
 {
     use HasFactory;
@@ -17,6 +18,7 @@ class MOlympiadResult extends Model
         'olympiad_id',
         'practicant_id',
         'subscribe_id',
+        'is_self',
         'task_id',
         'table_link',
         'result_date',
@@ -44,11 +46,6 @@ class MOlympiadResult extends Model
         return $this->belongsTo(MParticipant::class, 'participant_id');
     }
 
-    public function task()
-    {
-        return $this->belongsTo(MOlympiadTask::class, 'task_id');
-    }
-
     static public function SaveResultExternal($external=[],$isFinish=[]){
         if (empty($external)) {
             return false;
@@ -68,13 +65,15 @@ class MOlympiadResult extends Model
         $Bad=$isFinish['bals']['bad']??0;
         $table_link= $external['add_vars']['table_link']?? null;
 
-
-
+        if ($external['add_vars']['task_id']>0) {
+         $OlympyadTaskInfo= MOlympiadTasks::where('task_id', $external['add_vars']['task_id'])->where('practicant_id', $practicant_id)->first();
+        }
         $TaskResult = [
             'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'practicant_id' => $practicant_id,
             'task_id' =>  $external['add_vars']['task_id'] ?? null,
             'subscribe_id' =>  $external['add_vars']['subscribe_id'] ?? null,
+            'is_self' =>  $OlympyadTaskInfo['is_self'] ?? 0,
             'table_link' => $table_link,
             'result_date' => now(),
             'time_memory' => $TotalTimeShow,
@@ -85,7 +84,7 @@ class MOlympiadResult extends Model
 
         ];
         $result = MOlympiadResult::create($TaskResult);
-        $idResult = $result->id;
+        $idResult = $result->id??0;
         $FullResult= [];
         $FullResult['PageList']=session()->get('PageList',[]);
         $FullResult['TrainingTask']=session()->get('TrainingTask',[]);
@@ -93,13 +92,16 @@ class MOlympiadResult extends Model
         $FullResult['resultSave']=session()->get('resultSave',[]);
         $FullResult['isFinish']=$isFinish['isFinish']??[];
 
-        MOlympiadResult::where('id',$idResult)->update(['full_info'=>$FullResult]);
+        if (!empty($idResult)){
+            MOlympiadResult::where('id',$idResult)->update(['full_info'=>$FullResult]);
+        }
+
 
         if ($external['add_vars']['task_id']>0){
             MOlympiadTasks::where('task_id', $external['add_vars']['task_id'])
                 ->where('practicant_id', $practicant_id)
                 ->update(['is_done' => 1]);
         }
-
+        return $idResult;
     }
 }
