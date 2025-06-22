@@ -68,5 +68,33 @@ class MOlympiad extends Model
         return $this->hasMany(MPayment::class, 'olympiad_id', 'id')
             ->where('participant_id', $participant_id);
     }
+    /**
+     * Check if the Olympiad is active based on the current date.
+     *
+     * @param string $startDate
+     * @param string $endDate
+     * @return bool
+     */
+    public function isOlympiadActive($OlympiadObj=[]) {
+        $now = date('Y-m-d');
+        if (empty($OlympiadObj)){
+            return 'inactive';
+        }
+        if ($OlympiadObj['status'] == 'draft') {
+            return 'draft';
+        }
+        $OlympiadObj=(array)$OlympiadObj;
+        $startDate=$OlympiadObj['start_date'] ?? null;
+        $endDate=$OlympiadObj['end_date'] ?? null;
+         if ($now >= $startDate && $now <= $endDate){
+            return 'active';
+         }
+        $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
+        $announcement_end_date = $OlympiadObj['announcement_end_date'] ?? null;
+        if ($now >= $announcement_start_date && $now <= $announcement_end_date){
+            return 'announced';
+        }
+        return 'completed';
+    }
 
 }
