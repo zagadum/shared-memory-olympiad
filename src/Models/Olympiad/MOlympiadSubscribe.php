@@ -14,7 +14,15 @@ class MOlympiadSubscribe extends Model
     protected $table = 'm_olympiad_subscribe';
 
     protected $fillable = [
-        'practicant_id', 'olympiad_id', 'language','subscribe_date','is_pay','age_tab','stages_level','stages_num',
+        'practicant_id',
+        'olympiad_id',
+        'language',
+        'subscribe_date',
+        'is_pay',
+        'age_tab',
+        'stages_level',
+        'stages_num',
+        'is_finish'
     ];
 
 
