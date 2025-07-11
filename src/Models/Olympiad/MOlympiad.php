@@ -89,17 +89,25 @@ class MOlympiad extends Model
         $OlympiadObj=(array)$OlympiadObj;
         $startDate=$OlympiadObj['start_date'] ?? null;
         $endDate=$OlympiadObj['end_date'] ?? null;
+        $statusSet=$OlympiadObj['status'] ?? 'draft';
          if ($now >= $startDate && $now <= $endDate){
              $this->UpdateStatus($id, $OlympiadObj['status'],'active');
-            return 'active';
+             $statusSet='active';
+         }else{
+             $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
+             $announcement_end_date = $OlympiadObj['announcement_end_date'] ?? null;
+             if ($now >= $announcement_start_date && $now <= $announcement_end_date){
+                 $statusSet= 'announced';
+             }else{
+                 $statusSet= 'completed';
+             }
+
          }
-        $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
-        $announcement_end_date = $OlympiadObj['announcement_end_date'] ?? null;
-        if ($now >= $announcement_start_date && $now <= $announcement_end_date){
-            $this->UpdateStatus($id, $OlympiadObj['status'],'announced');
-            return 'announced';
+
+        if ($statusSet !='draft') {
+            $this->UpdateStatus($id, $OlympiadObj['status'],$statusSet);
         }
-        return 'completed';
+        return $statusSet;
     }
         private function UpdateStatus($id,$oldStatus=null, $status='')
         {
