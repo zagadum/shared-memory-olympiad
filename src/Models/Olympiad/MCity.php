@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MCity extends Model
 {
     protected $table = 'city';
-
+    protected $connection = 'memory_olympiad';
     protected $fillable = [
         'name',
         'country_id',
