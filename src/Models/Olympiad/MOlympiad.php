@@ -82,7 +82,10 @@ class MOlympiad extends Model
         if (empty($OlympiadObj)){
             return 'inactive';
         }
-        if ($OlympiadObj['status'] == 'draft') {
+        if (empty($OlympiadObj['status'])){
+            return 'inactive';
+        }
+        if (isset($OlympiadObj['status']) && $OlympiadObj['status'] == 'draft') {
             return 'draft';
         }
         $id=$OlympiadObj['id'] ?? null;
