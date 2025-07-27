@@ -15,7 +15,10 @@ class MOlympiadAgreement extends Model
     protected $fillable = [
         'olympiad_id', 'language',  'agreement'
     ];
-
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
     public function olympiad()
     {
         return $this->belongsTo(MOlympiad::class, 'olympiad_id');
