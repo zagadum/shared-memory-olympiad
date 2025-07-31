@@ -70,15 +70,16 @@ class MOlympiad extends Model
 
     public function getDescriptionsAttribute(): Collection
     {
-        return $this->olympiadDescriptions->mapWithKeys(function ($item) {
-            return [
-                $item->language => [
-                    'title' => $item->title,
-                    'cover' => $item->cover,
-                    'short_description' => $item->short_description,
-                ],
-            ];
-        });
+        $desc = $this->MOlympiadDescription;
+
+        if (!$desc) return [];
+        return [
+            $desc->language => [
+                'title' => $desc->title,
+                'cover' => $desc->cover,
+                'short_description' => $desc->short_description,
+            ],
+        ];
     }
 
     public function MOlympiadDescriptionFull()
