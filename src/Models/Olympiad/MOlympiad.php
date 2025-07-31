@@ -64,14 +64,14 @@ class MOlympiad extends Model
         return $this->hasOne(MCountry::class, 'id', 'country_id');
 
     }
-    public function MOlympiadDescription()
+    public function MOlympiadDescriptions()
     {
         return $this->hasMany(MOlympiadDescription::class, 'olympiad_id', 'id');
     }
 
     public function getDescriptionsAttribute(): Collection
     {
-        return $this->olympiadDescriptions->mapWithKeys(function ($item) {
+        return $this->MOlympiadDescriptions->mapWithKeys(function ($item) {
             return [
                 $item->language => [
                     'title' => $item->title,
