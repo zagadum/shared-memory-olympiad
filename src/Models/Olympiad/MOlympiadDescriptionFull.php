@@ -20,4 +20,8 @@ class MOlympiadDescriptionFull extends Model
     {
         return $this->belongsTo(MOlympiad::class, 'olympiad_id');
     }
+    public function MOlympiadDescriptionFull()
+    {
+        return $this->hasMany(MOlympiadDescriptionFull::class, 'olympiad_id', 'id');
+    }
 }
