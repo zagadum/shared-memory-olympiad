@@ -63,6 +63,40 @@ class MOlympiad extends Model
         return $this->hasOne(MCountry::class, 'id', 'country_id');
 
     }
+    public function MOlympiadDescription()
+    {
+        return $this->hasOne(MOlympiadDescription::class, 'olympiad_id', 'id');
+    }
+
+    public function getDescriptionsAttribute(): Collection
+    {
+        return $this->olympiadDescriptions->mapWithKeys(function ($item) {
+            return [
+                $item->language => [
+                    'title' => $item->title,
+                    'cover' => $item->cover,
+                    'short_description' => $item->short_description,
+                ],
+            ];
+        });
+    }
+
+    public function MOlympiadDescriptionFull()
+    {
+        return $this->hasOne(MOlympiadDescriptionFull::class, 'olympiad_id', 'id');
+    }
+
+    public function getDescriptionsFullAttribute(): Collection
+    {
+        return $this->olympiadDescriptionsFull->mapWithKeys(function ($item) {
+            return [
+                $item->language => [
+                    'full_description' => $item->full_description,
+                ],
+            ];
+        });
+    }
+
     public function paymentsByParticipant($participant_id)
     {
         return $this->hasMany(MPayment::class, 'olympiad_id', 'id')

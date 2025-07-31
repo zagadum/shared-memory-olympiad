@@ -70,6 +70,6 @@ class MParticipant extends Model
         // Связи
     public function olympiads()
     {
-        return $this->hasMany(MOlympiad::class, 'created_by');
+        return $this->hasMany(MOlympiad::class, 'olympiad_id', 'id');
     }
 }
