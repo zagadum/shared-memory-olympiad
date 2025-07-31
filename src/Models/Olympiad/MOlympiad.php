@@ -9,6 +9,7 @@ use MemoryOlympiad\Models\Olympiad\MRegion;
 use MemoryOlympiad\Models\Olympiad\MPayment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class MOlympiad extends Model
 {
@@ -65,26 +66,25 @@ class MOlympiad extends Model
     }
     public function MOlympiadDescription()
     {
-        return $this->hasOne(MOlympiadDescription::class, 'olympiad_id', 'id');
+        return $this->hasMany(MOlympiadDescription::class, 'olympiad_id', 'id');
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): Collection
     {
-        $desc = $this->MOlympiadDescription;
-
-        if (!$desc) return [];
-        return [
-            $desc->language => [
-                'title' => $desc->title,
-                'cover' => $desc->cover,
-                'short_description' => $desc->short_description,
-            ],
-        ];
+        return $this->olympiadDescriptions->mapWithKeys(function ($item) {
+            return [
+                $item->language => [
+                    'title' => $item->title,
+                    'cover' => $item->cover,
+                    'short_description' => $item->short_description,
+                ],
+            ];
+        });
     }
 
     public function MOlympiadDescriptionFull()
     {
-        return $this->hasOne(MOlympiadDescriptionFull::class, 'olympiad_id', 'id');
+        return $this->hasMany(MOlympiadDescriptionFull::class, 'olympiad_id', 'id');
     }
 
     public function getDescriptionsFullAttribute(): Collection
