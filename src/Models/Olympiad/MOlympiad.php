@@ -68,7 +68,7 @@ class MOlympiad extends Model
         return $this->hasOne(MOlympiadDescription::class, 'olympiad_id', 'id');
     }
 
-    public function getDescriptionsAttribute(): Collection
+    public function getDescriptionsAttribute()
     {
         $desc = $this->MOlympiadDescription;
 
