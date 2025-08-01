@@ -112,7 +112,9 @@ class MOlympiad extends Model
      */
     public function isOlympiadActive($OlympiadObj=[]) {
 
-        $now = date('Y-m-d');
+        $nowBegin = date('Y-m-d 00:00:00');
+        $nowEnd = date('Y-m-d 23:59:59');
+
 
         if (empty($OlympiadObj)){
             return 'inactive';
@@ -128,13 +130,13 @@ class MOlympiad extends Model
         $startDate=$OlympiadObj['start_date'] ?? null;
         $endDate=$OlympiadObj['end_date'] ?? null;
         $statusSet=$OlympiadObj['status'] ?? 'draft';
-         if ($now >= $startDate && $now <= $endDate){
+         if ($nowBegin >= $startDate && $nowEnd <= $endDate){
              $this->UpdateStatus($id, $OlympiadObj['status'],'active');
              $statusSet='active';
          }else{
              $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
              $announcement_end_date = $OlympiadObj['announcement_end_date'] ?? null;
-             if ($now >= $announcement_start_date && $now <= $announcement_end_date){
+             if ($nowBegin >= $announcement_start_date && $nowEnd <= $announcement_end_date){
                  $statusSet= 'announced';
              }else{
                  $statusSet= 'completed';
