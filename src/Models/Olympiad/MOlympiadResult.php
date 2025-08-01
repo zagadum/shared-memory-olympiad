@@ -18,6 +18,7 @@ class MOlympiadResult extends Model
         'olympiad_id',
         'practicant_id',
         'subscribe_id',
+        'params_id',
         'is_self',
         'task_id',
         'table_link',
@@ -38,12 +39,17 @@ class MOlympiadResult extends Model
 
     public function olympiad()
     {
-        return $this->belongsTo(MOlympiad::class, 'olympiad_id');
+        return $this->belongsTo(MOlympiad::class, 'olympiad_id', 'id');
     }
 
     public function participant()
     {
-        return $this->belongsTo(MParticipant::class, 'participant_id');
+        return $this->belongsTo(MParticipant::class, 'participant_id', 'id');
+    }
+
+    public function paramsOlympiad()
+    {
+        return $this->belongsTo(MOlympiadParams::class, 'params_id', 'id');
     }
 
     static public function SaveResultExternal($external=[],$isFinish=[]){
@@ -68,12 +74,15 @@ class MOlympiadResult extends Model
         if ($external['add_vars']['task_id']>0) {
          $OlympyadTaskInfo= MOlympiadTasks::where('task_id', $external['add_vars']['task_id'])->where('practicant_id', $practicant_id)->first();
         }
+
+        $subscribe_id=$external['add_vars']['subscribe_id'] ?? $OlympyadTaskInfo['subscribe_id'] ?? null;
         $TaskResult = [
             'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'practicant_id' => $practicant_id,
             'task_id' =>  $external['add_vars']['task_id'] ?? null,
-            'subscribe_id' =>  $external['add_vars']['subscribe_id'] ?? $OlympyadTaskInfo['subscribe_id'] ?? null,
+            'subscribe_id' => $subscribe_id ,
             'is_self' =>  $OlympyadTaskInfo['is_self'] ?? 0,
+            'params_id' =>  $OlympyadTaskInfo['params_id'] ?? 0,
             'table_link' => $table_link,
             'result_date' => now(),
             'time_memory' => $TotalTimeShow,
@@ -101,6 +110,10 @@ class MOlympiadResult extends Model
             MOlympiadTasks::where('task_id', $external['add_vars']['task_id'])
                 ->where('practicant_id', $practicant_id)
                 ->update(['is_done' => 1]);
+        }
+
+        if ($OlympyadTaskInfo['is_self']==0){//Живая олимпиада
+            MOlympiadSubscribe::IsFinish($subscribe_id,$practicant_id);
         }
         return $idResult;
     }
