@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MemoryOlympiad\Models\Olympiad\MOlympiadParams;
 use MemoryOlympiad\Models\Olympiad\MParticipant;
-use MemoryOlympiad\Models\Olympiad\MOlympiadTask;
+use MemoryOlympiad\Models\Olympiad\MOlympiadTasks;
 
 
 class MOlympiadSubscribe extends Model
@@ -60,7 +60,7 @@ class MOlympiadSubscribe extends Model
             return 0; // нет параметров — нет задач
         }
         // Список выполненных задач
-        $doneTaskIds  = MOlympiadTask::whereIn('params_id', $allTaskIds)
+        $doneTaskIds  = MOlympiadTasks::whereIn('params_id', $allTaskIds)
             ->where('is_self', 0)
             ->where('practicant_id', $practicant_id)
             ->where('subscribe_id', $subscribe_id)
