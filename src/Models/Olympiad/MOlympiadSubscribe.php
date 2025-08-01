@@ -65,7 +65,7 @@ class MOlympiadSubscribe extends Model
             ->where('practicant_id', $practicant_id)
             ->where('subscribe_id', $subscribe_id)
             ->where('is_done', 1)
-            ->pluck('id');
+            ->pluck('task_id');
 
         if (empty($doneTaskIds)){
             return 0; // нет выполненных задач
