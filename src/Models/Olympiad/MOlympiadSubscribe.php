@@ -41,10 +41,12 @@ class MOlympiadSubscribe extends Model
 
     public function IsFinish($subscribe_id=0,$practicant_id=0){
         if (empty($subscribe_id) || empty($practicant_id)) {
+            print "Не указаны параметры для проверки завершения подписки";
             return 0;
         }
         $subscribe = MOlympiadSubscribe::where('id',$subscribe_id)->where('practicant_id',$practicant_id)->first();
         if (empty($subscribe)) {
+            print "Не указаны параметры для проверки завершения подписки2";
             return 0;
         }
 
@@ -54,7 +56,8 @@ class MOlympiadSubscribe extends Model
             'stages_level' => $subscribe['stages_level'],
             'stages_num' => $subscribe['stages_num'],
         ])->pluck('id');
-
+        print "$allTaskIds: ";
+        print_r($allTaskIds);
 
         if ($allTaskIds->isEmpty()) {
             return 0; // нет параметров — нет задач
@@ -66,12 +69,14 @@ class MOlympiadSubscribe extends Model
             ->where('subscribe_id', $subscribe_id)
             ->where('is_done', 1)
             ->pluck('task_id');
-
+        print "$doneTaskIds: ";
+        print_r($doneTaskIds);
         if (empty($doneTaskIds)){
             return 0; // нет выполненных задач
         }
         $notDone = $allTaskIds->diff($doneTaskIds);
-
+        print "Не выполненные задачи: ";
+        print_r($notDone);
         if ($notDone->isEmpty()) {
             MOlympiadSubscribe::where('id', $subscribe_id)->where('practicant_id',$practicant_id)->update(['is_finish' => 1]);
             return 1; // все задачи выполнены
