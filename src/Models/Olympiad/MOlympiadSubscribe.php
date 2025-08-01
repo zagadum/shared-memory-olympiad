@@ -44,18 +44,18 @@ class MOlympiadSubscribe extends Model
             return 0;
         }
         $subscribe = MOlympiadSubscribe::where('id',$subscribe_id)->where('practicant_id',$practicant_id)->first();
-        if (!$subscribe) {
+        if (empty($subscribe)) {
             return 0;
         }
 
-        $params = MOlympiadParams::where([
-            'olympiad_id' => $subscribe->olympiad_id,
-            'age_tab' => $subscribe->age_tab,
-            'stages_level' => $subscribe->stages_level,
-            'stages_num' => $subscribe->stages_num,
-        ])->get();
+        $allTaskIds = MOlympiadParams::where([
+            'olympiad_id' => $subscribe['olympiad_id'],
+            'age_tab' => $subscribe['age_tab'],
+            'stages_level' => $subscribe['stages_level'],
+            'stages_num' => $subscribe['stages_num'],
+        ])->pluck('id');
 
-        $allTaskIds = $params->pluck('id');
+
         if ($allTaskIds->isEmpty()) {
             return 0; // нет параметров — нет задач
         }
