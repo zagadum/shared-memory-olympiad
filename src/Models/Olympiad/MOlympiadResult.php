@@ -113,7 +113,7 @@ class MOlympiadResult extends Model
                 ->update(['is_done' => 1]);
         }
 
-        if ($OlympyadTaskInfo['is_self']==0){//Живая олимпиада
+        if (isset($OlympyadTaskInfo['is_self']) && $OlympyadTaskInfo['is_self']==0){//Живая олимпиада
             MOlympiadSubscribe::IsFinish($subscribe_id,$practicant_id);
         }
         return $idResult;
