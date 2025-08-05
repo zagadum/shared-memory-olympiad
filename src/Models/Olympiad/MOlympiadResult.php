@@ -76,13 +76,14 @@ class MOlympiadResult extends Model
         }
 
         $subscribe_id=$external['add_vars']['subscribe_id'] ?? $OlympyadTaskInfo['subscribe_id'] ?? null;
+        $params_id= $external['add_vars']['params_id']??$OlympyadTaskInfo['params_id']??0;
         $TaskResult = [
             'olympiad_id' => $external['add_vars']['olympiad_id'] ?? null,
             'practicant_id' => $practicant_id,
             'task_id' =>  $external['add_vars']['task_id'] ?? null,
             'subscribe_id' => $subscribe_id ,
             'is_self' =>  $OlympyadTaskInfo['is_self'] ?? 0,
-            'params_id' =>  $OlympyadTaskInfo['params_id'] ?? 0,
+            'params_id' =>  $params_id?? 0,
             'table_link' => $table_link,
             'result_date' => now(),
             'time_memory' => $TotalTimeShow,
