@@ -5,7 +5,7 @@ namespace MemoryOlympiad\Models\Olympiad;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MOlympiadHistoryTask extends Model
+class MOlympiadWordsTask extends Model
 {
     use HasFactory;
 
@@ -13,13 +13,21 @@ class MOlympiadHistoryTask extends Model
 
 
     protected $fillable = [
-        'year',
+        'id',
         'name',
-        'category_id'
+        'part_word',
+        'lang',
+        'is_practice',
+        'is_profi'
+    ];
+
+
+    protected $dates = [
+
     ];
     public function setLangTable($lang)
     {
-        $this->setTable('training_history_task_' . $lang);
+        $this->setTable('training_words_task_' . $lang);
     }
 
 }
