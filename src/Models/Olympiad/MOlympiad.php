@@ -35,7 +35,8 @@ class MOlympiad extends Model
         'local_currency', //default UAH
         'international_price',
         'international_currency',//default EUR
-        'created_by'
+        'created_by',
+        'domain'
     ];
 
     protected $casts = [
