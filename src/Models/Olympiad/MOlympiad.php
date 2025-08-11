@@ -132,7 +132,10 @@ class MOlympiad extends Model
         $endDate=$OlympiadObj['end_date'] ?? null;
         $statusSet=$OlympiadObj['status'] ?? 'draft';
          if ($nowBegin >= $startDate && $nowEnd <= $endDate){
-             $this->UpdateStatus($id, $OlympiadObj['status'],'active');
+             if (isset($OlympiadObj['status'])){
+                 $this->UpdateStatus($id, $OlympiadObj['status'],'active');
+             }
+
              $statusSet='active';
          }else{
              $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
@@ -145,7 +148,7 @@ class MOlympiad extends Model
 
          }
 
-        if ($statusSet !='draft') {
+        if (isset($OlympiadObj['status']) &&  $statusSet !='draft') {
             $this->UpdateStatus($id, $OlympiadObj['status']??null,$statusSet);
         }
         return $statusSet;
