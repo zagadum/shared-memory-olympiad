@@ -146,7 +146,7 @@ class MOlympiad extends Model
          }
 
         if ($statusSet !='draft') {
-            $this->UpdateStatus($id, $OlympiadObj['status'],$statusSet);
+            $this->UpdateStatus($id, $OlympiadObj['status']??null,$statusSet);
         }
         return $statusSet;
     }
