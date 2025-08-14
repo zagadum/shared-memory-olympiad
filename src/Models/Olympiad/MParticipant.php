@@ -18,7 +18,10 @@ class MParticipant extends Model
         'email', 'email_verified_at', 'phone', 'phone_country',
         'country_id', 'region_id', 'city_id', 'locality',
         'school', 'age_id', 'blocked', 'deleted', 'last_login_at',
-        'password', 'remember_token', 'api_token', 'student_id', 'dob','language'
+        'password', 'remember_token', 'api_token', 'student_id',
+        'dob',
+        'language',
+        'domain'
     ];
 
     protected $hidden = ['password', 'remember_token', 'api_token'];
