@@ -143,6 +143,7 @@ class MOlympiad extends Model
 
         $statusSet= 'draft';
         if ( isset($endDate)  && $now > $endDate){
+            print_r($OlympiadObj);
             print '<br>'.$OlympiadObj['id'].' end '.date('d.m.Y H:i:s',$endDate).' = '.$OlympiadObj['end_date'].' now '.date('d.m.Y H:i:s',$now).'<br>';
             $statusSet= 'completed';
         }elseif (isset($startDate) && isset($endDate)   && $now >= $startDate && $now <= $endDate){
