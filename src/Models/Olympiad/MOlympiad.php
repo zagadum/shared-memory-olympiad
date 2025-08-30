@@ -113,12 +113,23 @@ class MOlympiad extends Model
      */
     public function isOlympiadActive($OlympiadObj=[]) {
 
+        $timeZone= 'Europe/Kiev';
         if (is_object($OlympiadObj)){
             $OlympiadObj=(array)$OlympiadObj;
         }
-        $nowBegin = strtotime(date('Y-m-d 00:00:00'));
-        $nowEnd = strtotime(date('Y-m-d 23:59:59'));
-        $now  = strtotime("now");
+
+
+
+        $dt_begin = new DateTime('Y-m-d 00:00:00', new DateTimeZone($timeZone));
+        $nowBegin  =$dt_begin->getTimestamp();
+
+        $dt_end = new DateTime('Y-m-d 23:59:59', new DateTimeZone($timeZone));
+        $nowEnd  =$dt_begin->getTimestamp();
+
+
+        $dt = new DateTime("now", new DateTimeZone("Europe/Kiev"));
+        $now  =$dt->getTimestamp();
+
 
 
         $OlympiadObj['status']=$OlympiadObj['status']??null;
@@ -133,13 +144,31 @@ class MOlympiad extends Model
             return 'draft';
         }
         $id=$OlympiadObj['id'] ?? null;
-        $OlympiadObj=(array)$OlympiadObj;
-        if (!empty($OlympiadObj['start_date'])){
-            $startDate=strtotime($OlympiadObj['start_date'].' 00:00:00');
-        }
+
+
+
         if (!empty($OlympiadObj['end_date'])){
-            $endDate=strtotime($OlympiadObj['end_date'].' 23:59:59');
+            if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
+                $dt_end_date = \Carbon\Carbon::parse($OlympiadObj['end_date']."23:59:59", $timeZone);
+                $endDate = $dt_end_date->timestamp;
+            } else {
+                $dt_end_date = new DateTime($OlympiadObj['end_date']."23:59:59", new DateTimeZone($timeZone));
+                $endDate = $dt_end_date->timestamp;
+            }
         }
+
+        if (!empty($OlympiadObj['start_date'])){
+            if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
+                $dt_start_date = \Carbon\Carbon::parse($OlympiadObj['start_date']."00:00:00", $timeZone);
+                $startDate = $dt_start_date->timestamp;
+            } else {
+                $dt_start_date = new DateTime($OlympiadObj['start_date']."0:00:00", new DateTimeZone($timeZone));
+                $startDate = $dt_start_date->timestamp;
+            }
+        }
+
+
+
 
         $statusSet= 'draft';
         if ( isset($endDate)  && $now > $endDate){
