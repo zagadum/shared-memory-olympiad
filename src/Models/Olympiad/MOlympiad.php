@@ -120,14 +120,14 @@ class MOlympiad extends Model
 
 
 
-        $dt_begin = new DateTime('Y-m-d 00:00:00', new DateTimeZone($timeZone));
+        $dt_begin = new \DateTime('Y-m-d 00:00:00', new DateTimeZone($timeZone));
         $nowBegin  =$dt_begin->getTimestamp();
 
-        $dt_end = new DateTime('Y-m-d 23:59:59', new DateTimeZone($timeZone));
+        $dt_end = new \DateTime('Y-m-d 23:59:59', new DateTimeZone($timeZone));
         $nowEnd  =$dt_begin->getTimestamp();
 
 
-        $dt = new DateTime("now", new DateTimeZone("Europe/Kiev"));
+        $dt = new \DateTime("now", new \DateTimeZone("Europe/Kiev"));
         $now  =$dt->getTimestamp();
 
 
@@ -152,7 +152,7 @@ class MOlympiad extends Model
                 $dt_end_date = \Carbon\Carbon::parse($OlympiadObj['end_date']."23:59:59", $timeZone);
                 $endDate = $dt_end_date->timestamp;
             } else {
-                $dt_end_date = new DateTime($OlympiadObj['end_date']."23:59:59", new DateTimeZone($timeZone));
+                $dt_end_date = new \DateTime($OlympiadObj['end_date']."23:59:59", new \DateTimeZone($timeZone));
                 $endDate = $dt_end_date->timestamp;
             }
         }
@@ -162,7 +162,7 @@ class MOlympiad extends Model
                 $dt_start_date = \Carbon\Carbon::parse($OlympiadObj['start_date']."00:00:00", $timeZone);
                 $startDate = $dt_start_date->timestamp;
             } else {
-                $dt_start_date = new DateTime($OlympiadObj['start_date']."0:00:00", new DateTimeZone($timeZone));
+                $dt_start_date = new \DateTime($OlympiadObj['start_date']."0:00:00", new \DateTimeZone($timeZone));
                 $startDate = $dt_start_date->timestamp;
             }
         }
