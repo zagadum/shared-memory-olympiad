@@ -129,7 +129,7 @@ class MOlympiad extends Model
         $id=$OlympiadObj['id'] ?? null;
         $OlympiadObj=(array)$OlympiadObj;
         $startDate=$OlympiadObj['start_date'] ?? null;
-        $endDate=$OlympiadObj['end_date'] ?? null;
+        $endDate = isset($OlympiadObj['end_date']) ? $OlympiadObj['end_date'] . ' 23:59:59' : null;
         $statusSet=$OlympiadObj['status'] ?? 'draft';
          if ($nowBegin >= $startDate && $nowEnd <= $endDate){
              if (isset($OlympiadObj['status'])){
@@ -139,7 +139,7 @@ class MOlympiad extends Model
              $statusSet='active';
          }else{
              $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
-             $announcement_end_date = $OlympiadObj['announcement_end_date'] ?? null;
+             $announcement_end_date = $OlympiadObj['announcement_end_date'] . ' 23:59:59' ?? null;
              if ($nowBegin >= $announcement_start_date && $nowEnd <= $announcement_end_date){
                  $statusSet= 'announced';
              }else{
