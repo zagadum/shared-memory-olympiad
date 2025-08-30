@@ -118,6 +118,8 @@ class MOlympiad extends Model
         }
         $nowBegin = strtotime(date('Y-m-d 00:00:00'));
         $nowEnd = strtotime(date('Y-m-d 23:59:59'));
+        $now  = strtotime("now");
+
 
         $OlympiadObj['status']=$OlympiadObj['status']??null;
 
@@ -140,10 +142,10 @@ class MOlympiad extends Model
         }
 
         $statusSet= 'draft';
-        if ( isset($endDate)  && $nowEnd > $endDate){
-            print $OlympiadObj['id'].' end '.date('d.m.Y H:i:s',$endDate).' = '.$OlympiadObj['end_date'].' now '.date('d.m.Y H:i:s',$nowEnd).'<br>';
+        if ( isset($endDate)  && $now > $endDate){
+            print $OlympiadObj['id'].' end '.date('d.m.Y H:i:s',$endDate).' = '.$OlympiadObj['end_date'].' now '.date('d.m.Y H:i:s',$now).'<br>';
             $statusSet= 'completed';
-        }elseif (isset($startDate) && isset($endDate)   && $nowBegin >= $startDate && $nowEnd <= $endDate){
+        }elseif (isset($startDate) && isset($endDate)   && $now >= $startDate && $now <= $endDate){
              $statusSet='active';
          }else{
              if (!empty($OlympiadObj['announcement_start_date'])){
@@ -152,7 +154,7 @@ class MOlympiad extends Model
              if (!empty($OlympiadObj['announcement_end_date'])){
                  $announcement_end_date=strtotime($OlympiadObj['announcement_end_date'].' 23:59:59');
              }
-             if (isset($announcement_start_date) && isset($announcement_end_date) && $nowBegin >= $announcement_start_date && $nowEnd <= $announcement_end_date){
+             if (isset($announcement_start_date) && isset($announcement_end_date) && $now >= $announcement_start_date && $now <= $announcement_end_date){
                  $statusSet= 'announced';
              }
          }
