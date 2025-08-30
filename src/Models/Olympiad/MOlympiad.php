@@ -141,6 +141,13 @@ class MOlympiad extends Model
         }
         $id=$OlympiadObj['id'] ?? null;
 
+        if (!empty($OlympiadObj['start_date'])){
+            if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
+                $startDate = $OlympiadObj['start_date']->copy()->setTimezone($timeZone)->startOfDay()->timestamp;
+            } else {
+                $startDate = Carbon::parse($OlympiadObj['start_date'], $timeZone)->startOfDay()->timestamp;
+            }
+        }
 
 
         if (!empty($OlympiadObj['end_date'])){
@@ -151,31 +158,35 @@ class MOlympiad extends Model
             }
         }
 
-        if (!empty($OlympiadObj['start_date'])){
-            if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
-                $startDate = $OlympiadObj['start_date']->copy()->setTimezone($timeZone)->startOfDay()->timestamp;
-            } else {
-                $startDate = Carbon::parse($OlympiadObj['start_date'], $timeZone)->startOfDay()->timestamp;
-            }
-        }
 
 
 
 
         $statusSet= 'draft';
         if ( isset($endDate)  && $now > $endDate){
-            print_r($OlympiadObj);
-            print '<br>'.$OlympiadObj['id'].' end '.date('d.m.Y H:i:s',$endDate).' = '.$OlympiadObj['end_date'].' now '.date('d.m.Y H:i:s',$now).'<br>';
-            $statusSet= 'completed';
+             $statusSet= 'completed';
         }elseif (isset($startDate) && isset($endDate)   && $now >= $startDate && $now <= $endDate){
              $statusSet='active';
          }else{
-             if (!empty($OlympiadObj['announcement_start_date'])){
-                 $announcement_start_date=strtotime($OlympiadObj['announcement_start_date'].' 00:00:00');
-             }
-             if (!empty($OlympiadObj['announcement_end_date'])){
-                 $announcement_end_date=strtotime($OlympiadObj['announcement_end_date'].' 23:59:59');
-             }
+
+
+
+            if (!empty($OlympiadObj['announcement_start_date'])){
+                if ($OlympiadObj['announcement_start_date'] instanceof \Illuminate\Support\Carbon) {
+                    $announcement_start_date = $OlympiadObj['announcement_start_date']->copy()->setTimezone($timeZone)->startOfDay()->timestamp;
+                } else {
+                    $announcement_start_date = Carbon::parse($OlympiadObj['announcement_start_date'], $timeZone)->startOfDay()->timestamp;
+                }
+            }
+
+            if (!empty($OlympiadObj['announcement_end_date'])){
+                if ($OlympiadObj['announcement_end_date'] instanceof \Illuminate\Support\Carbon) {
+                    $announcement_end_date = $OlympiadObj['announcement_end_date']->copy()->setTimezone($timeZone)->endOfDay()->timestamp;
+                } else {
+                    $announcement_end_date = Carbon::parse($OlympiadObj['announcement_end_date'], $timeZone)->endOfDay()->timestamp;
+                }
+            }
+
              if (isset($announcement_start_date) && isset($announcement_end_date) && $now >= $announcement_start_date && $now <= $announcement_end_date){
                  $statusSet= 'announced';
              }
