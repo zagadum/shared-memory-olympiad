@@ -113,9 +113,13 @@ class MOlympiad extends Model
      */
     public function isOlympiadActive($OlympiadObj=[]) {
 
+        if (is_object($OlympiadObj)){
+            $OlympiadObj=(array)$OlympiadObj;
+        }
         $nowBegin = strtotime(date('Y-m-d 00:00:00'));
         $nowEnd = strtotime(date('Y-m-d 23:59:59'));
 
+        $OlympiadObj['status']=$OlympiadObj['status']??null;
 
         if (empty($OlympiadObj)){
             return 'inactive';
@@ -137,6 +141,7 @@ class MOlympiad extends Model
 
         $statusSet= 'draft';
         if ( isset($endDate)  && $nowEnd > $endDate){
+            print $OlympiadObj['id'].' end '.date('d.m.Y H:i:s',$endDate).' = '.$OlympiadObj['end_date'].' now '.date('d.m.Y H:i:s',$nowEnd).'<br>';
             $statusSet= 'completed';
         }elseif (isset($startDate) && isset($endDate)   && $nowBegin >= $startDate && $nowEnd <= $endDate){
              $statusSet='active';
@@ -152,8 +157,8 @@ class MOlympiad extends Model
              }
          }
 
-        if (isset($OlympiadObj['status']) &&  $statusSet !='draft') {
-            $this->UpdateStatus($id, $OlympiadObj['status']??null,$statusSet);
+        if (isset($OlympiadObj['status']) &&  $statusSet !='draft' ) {
+            $this->UpdateStatus($id, $OlympiadObj['status'],$statusSet);
         }
         return $statusSet;
     }
