@@ -113,8 +113,8 @@ class MOlympiad extends Model
      */
     public function isOlympiadActive($OlympiadObj=[]) {
 
-        $nowBegin = date('Y-m-d 00:00:00');
-        $nowEnd = date('Y-m-d 23:59:59');
+        $nowBegin = strtotime(date('Y-m-d 00:00:00'));
+        $nowEnd = strtotime(date('Y-m-d 23:59:59'));
 
 
         if (empty($OlympiadObj)){
@@ -128,24 +128,28 @@ class MOlympiad extends Model
         }
         $id=$OlympiadObj['id'] ?? null;
         $OlympiadObj=(array)$OlympiadObj;
-        $startDate=$OlympiadObj['start_date'] ?? null;
-        $endDate = isset($OlympiadObj['end_date']) ? $OlympiadObj['end_date'] . ' 23:59:59' : null;
-        $statusSet=$OlympiadObj['status'] ?? 'draft';
-         if ($nowBegin >= $startDate && $nowEnd <= $endDate){
-             if (isset($OlympiadObj['status'])){
-                 $this->UpdateStatus($id, $OlympiadObj['status'],'active');
-             }
+        if (!empty($OlympiadObj['start_date'])){
+            $startDate=strtotime($OlympiadObj['start_date'].' 00:00:00');
+        }
+        if (!empty($OlympiadObj['end_date'])){
+            $endDate=strtotime($OlympiadObj['end_date'].' 23:59:59');
+        }
 
+        $statusSet= 'draft';
+        if ( isset($endDate)  && $nowEnd > $endDate){
+            $statusSet= 'completed';
+        }elseif (isset($startDate) && isset($endDate)   && $nowBegin >= $startDate && $nowEnd <= $endDate){
              $statusSet='active';
          }else{
-             $announcement_start_date = $OlympiadObj['announcement_start_date'] ?? null;
-             $announcement_end_date = $OlympiadObj['announcement_end_date'] . ' 23:59:59' ?? null;
-             if ($nowBegin >= $announcement_start_date && $nowEnd <= $announcement_end_date){
-                 $statusSet= 'announced';
-             }else{
-                 $statusSet= 'completed';
+             if (!empty($OlympiadObj['announcement_start_date'])){
+                 $announcement_start_date=strtotime($OlympiadObj['announcement_start_date'].' 00:00:00');
              }
-
+             if (!empty($OlympiadObj['announcement_end_date'])){
+                 $announcement_end_date=strtotime($OlympiadObj['announcement_end_date'].' 23:59:59');
+             }
+             if (isset($announcement_start_date) && isset($announcement_end_date) && $nowBegin >= $announcement_start_date && $nowEnd <= $announcement_end_date){
+                 $statusSet= 'announced';
+             }
          }
 
         if (isset($OlympiadObj['status']) &&  $statusSet !='draft') {
