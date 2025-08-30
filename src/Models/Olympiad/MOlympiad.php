@@ -120,14 +120,14 @@ class MOlympiad extends Model
 
 
 
-        $dt_begin = new \DateTime('Y-m-d 00:00:00', new DateTimeZone($timeZone));
+        $dt_begin = new \DateTime('Y-m-d 00:00:00', new \DateTimeZone($timeZone));
         $nowBegin  =$dt_begin->getTimestamp();
 
-        $dt_end = new \DateTime('Y-m-d 23:59:59', new DateTimeZone($timeZone));
+        $dt_end = new \DateTime('Y-m-d 23:59:59', new \DateTimeZone($timeZone));
         $nowEnd  =$dt_begin->getTimestamp();
 
 
-        $dt = new \DateTime("now", new \DateTimeZone("Europe/Kiev"));
+        $dt = new \DateTime("now", new \DateTimeZone($timeZone));
         $now  =$dt->getTimestamp();
 
 
