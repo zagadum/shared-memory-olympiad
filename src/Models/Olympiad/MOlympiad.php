@@ -145,22 +145,17 @@ class MOlympiad extends Model
 
         if (!empty($OlympiadObj['end_date'])){
             if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
-                $dt_end_date = \Carbon\Carbon::parse($OlympiadObj['end_date']." 23:59:59", $timeZone);
-                $endDate = $dt_end_date->timestamp;
+                $endDate = $OlympiadObj['end_date']->copy()->setTimezone($timeZone)->endOfDay()->timestamp;
             } else {
-                $dt_end_date = new \DateTime($OlympiadObj['end_date']." 23:59:59", new \DateTimeZone($timeZone));
-                $endDate = $dt_end_date->timestamp;
+                $endDate = Carbon::parse($OlympiadObj['end_date'], $timeZone)->endOfDay()->timestamp;
             }
         }
 
         if (!empty($OlympiadObj['start_date'])){
             if ($OlympiadObj['end_date'] instanceof \Illuminate\Support\Carbon) {
-                $dt_start_date = \Carbon\Carbon::parse($OlympiadObj['start_date']." 00:00:00", $timeZone);
-                $startDate = $dt_start_date->timestamp;
+                $startDate = $OlympiadObj['start_date']->copy()->setTimezone($timeZone)->startOfDay()->timestamp;
             } else {
-
-                $dt_start_date = new \DateTime($OlympiadObj['start_date']." 00:00:00", new \DateTimeZone($timeZone));
-                $startDate = $dt_start_date->timestamp;
+                $startDate = Carbon::parse($OlympiadObj['start_date'], $timeZone)->startOfDay()->timestamp;
             }
         }
 
