@@ -120,10 +120,6 @@ class MOlympiad extends Model
         }
 
 
-
-
-
-
         $dt = new \DateTime("now", new \DateTimeZone($timeZone));
         $now  =$dt->getTimestamp();
 
