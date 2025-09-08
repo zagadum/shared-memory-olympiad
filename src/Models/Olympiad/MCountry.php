@@ -10,6 +10,9 @@ class MCountry extends Model
     protected $connection = 'memory_olympiad';
     protected $fillable = [
         'name',
+        'name_uk',
+        'name_pl',
+        'name_en',
         'img',
         'enabled',
     
