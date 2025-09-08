@@ -11,6 +11,9 @@ class MRegion extends Model
 
     protected $fillable = [
         'name',
+        'name_uk',
+        'name_pl',
+        'name_en',
         'country_id',
         'enabled',
     
