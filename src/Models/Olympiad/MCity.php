@@ -15,7 +15,6 @@ class MCity extends Model
         'name_pl',
         'country_id',
         'region_id'
-
     ];
 
     
