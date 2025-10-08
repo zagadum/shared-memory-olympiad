@@ -10,6 +10,9 @@ class MCity extends Model
     protected $connection = 'memory_olympiad';
     protected $fillable = [
         'name',
+        'name_uk',
+        'name_en',
+        'name_pl',
         'country_id',
         'region_id'
 
