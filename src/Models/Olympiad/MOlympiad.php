@@ -37,7 +37,9 @@ class MOlympiad extends Model
         'international_price',
         'international_currency',//default EUR
         'created_by',
-        'domain'
+        'domain',
+        'is_show_result',
+        'is_public_result'
     ];
 
     protected $casts = [
