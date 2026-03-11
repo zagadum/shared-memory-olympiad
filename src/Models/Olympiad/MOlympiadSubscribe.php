@@ -39,7 +39,7 @@ class MOlympiadSubscribe extends Model
         return $this->hasOne(MOlympiad::class, 'id', 'olympiad_id');
     }
 
-    public function IsFinish($subscribe_id=0,$practicant_id=0){
+    public static function IsFinish($subscribe_id=0,$practicant_id=0){
         if (empty($subscribe_id) || empty($practicant_id)) {
 
             return 0;
@@ -79,5 +79,7 @@ class MOlympiadSubscribe extends Model
             MOlympiadSubscribe::where('id', $subscribe_id)->where('practicant_id',$practicant_id)->update(['is_finish' => 1]);
             return 1; // все задачи выполнены
         }
+
+        return 0;
     }
 }
